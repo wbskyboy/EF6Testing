@@ -23,9 +23,10 @@ namespace EF6Testing
 		{
 			using (var ctx = new SchoolContext())
 			{
-				var student = new Student() { StudentName = "Bill" };
+				var student = new EmployeeMaster() { EmpName = "sdfsdf" };
 
-				ctx.Set<Student>().ToList();
+				ctx.Set<EmployeeMaster>().Add(student);
+				ctx.SaveChanges();
 			}
 			Console.WriteLine("Demo completed.");
 		}

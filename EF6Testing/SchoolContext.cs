@@ -26,26 +26,13 @@ namespace EF6Testing
 			//SqliteDropCreateDatabaseAlways
 			//SqliteDropCreateDatabaseWhenModelChanges
 			Database.SetInitializer(sqliteConnectionInitializer);
-
-
-			//初始化DbSet<SchoolContext>
-			Database.SetInitializer<SchoolContext>(new SchoolDBInitializer());
-
-			//Adds configurations for Student from separate class
-			modelBuilder.Configurations.Add(new StudentConfigurations());
-
-			//Adds configurations for Student from separate class
-			modelBuilder.Entity<Teacher>()
-				.ToTable("TeacherInfo");
-
-			modelBuilder.Entity<Teacher>()
-				.MapToStoredProcedures();
-
 			base.OnModelCreating(modelBuilder);
 		}
-		public DbSet<Student> Students { get; set; }
-		public DbSet<Grade> Grades { get; set; }
-		public DbSet<Course> Courses { get; set; }
-		public DbSet<StudentAddress> StudentAddresses { get; set; }
+		//public DbSet<Student> Students { get; set; }
+		//public DbSet<Grade> Grades { get; set; }
+		//public DbSet<Course> Courses { get; set; }
+		//public DbSet<StudentAddress> StudentAddresses { get; set; }
+
+		public DbSet<EmployeeMaster> EmployeeMasters { get; set; }
 	}
 }
