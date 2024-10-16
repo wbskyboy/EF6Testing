@@ -25,7 +25,13 @@ namespace EF6Testing
 			{
 				var student = new EmployeeMaster() { EmpName = "sdfsdf" };
 				ctx.Set<EmployeeMaster>().Add(student);
-				ctx.Set<Student>().Add(new Student() { StudentName = "Angle"});
+				var std =	new Student() { StudentName = "Angle" };
+				std.Grade = new Grade() { GradeName = "GrandEname" };
+				std.Address = new StudentAddress() { Address1 = "Address1" };
+				std.Courses = new List<Course>();
+				std.Courses.Add(new Course() { CourseName = "Course1"});
+				std.Courses.Add(new Course() { CourseName = "Course2" });
+				ctx.Set<Student>().Add(std);
 				ctx.SaveChanges();
 			}
 			Console.WriteLine("Demo completed.");
