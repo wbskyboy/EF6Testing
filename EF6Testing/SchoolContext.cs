@@ -15,13 +15,13 @@ namespace EF6Testing
 				ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = "D:\\Databases\\SQLiteWithEF.db", ForeignKeys = true }.ConnectionString
 			}, true)
 		{
+			Database.SetInitializer<SchoolContext>(new SchoolDBInitializer());
 		}
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            //初始化Sqlite
-			var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<SchoolContext>(modelBuilder);
-
+			//初始化Sqlite 方法1
+			var sqliteConnectionInitializer = new SqliteDropCreateDatabaseWhenModelChanges<SchoolContext>(modelBuilder);
 			//SqliteCreateDatabaseIfNotExists
 			//SqliteDropCreateDatabaseAlways
 			//SqliteDropCreateDatabaseWhenModelChanges
@@ -30,13 +30,12 @@ namespace EF6Testing
 			//Adds configurations for Student from separate class
 			modelBuilder.Configurations.Add(new StudentConfigurations());
 
-			modelBuilder.Entity<Teacher>()
-				.ToTable("TeacherInfo");
 
 			modelBuilder.Entity<Teacher>()
-				.MapToStoredProcedures();
+			  .ToTable("TeacherInfo");
 
-			base.OnModelCreating(modelBuilder);
+			//modelBuilder.Entity<Teacher>()
+			//	.MapToStoredProcedures();
 		}
 
 		public DbSet<Student> Students { get; set; }

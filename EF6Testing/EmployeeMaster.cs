@@ -22,5 +22,7 @@ namespace EF6Testing
 		public double Salary { get; set; }
 
 		public string Designation { get; set; }
+
+		public string Code { get; set; }
 	}
 }
